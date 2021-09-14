@@ -4,6 +4,7 @@
   "description": "Instaclone Backend",
   "scripts": {
     "dev": "nodemon --exec babel-node server",
+    "migrate": "npx prisma migrate dev",
     "start": "node server.js"
   },
   "repository": {
@@ -32,6 +33,5 @@
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
   },
-  "type": "module",
   "main": "server.js"
 }
