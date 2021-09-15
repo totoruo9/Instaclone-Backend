@@ -1,4 +1,5 @@
 import client from "../../client";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const EditProfileResolvers = {
@@ -8,15 +9,18 @@ const EditProfileResolvers = {
             lastName,
             username,
             email,
-            password:newPassword
+            password:newPassword,
+            token
         }) => {
+            const {id} = await jwt.verify(token, process.env.SECREAT_KEY);
+
             let uglyPassword = null;
             if(newPassword){
                 uglyPassword = await bcrypt.hash(newPassword, 10);
             };
             const updatedUser = await client.user.update({
                 where:{
-                    id:1
+                    id
                 },
                 data:{
                     firstName,
