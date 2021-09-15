@@ -1,6 +1,6 @@
-import client from "../client";
+import client from "../../client";
 
-const UserQueries = {
+const SeeProfileResolvers = {
     Query: {
         seeProfile: (_, {username}) => client.user.findUnique({
             where: {
@@ -10,4 +10,4 @@ const UserQueries = {
     },
 }
 
-export default UserQueries;
+export default SeeProfileResolvers;

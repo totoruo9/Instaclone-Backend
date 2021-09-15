@@ -1,6 +1,6 @@
 import {gql} from "apollo-server";
 
-const UsersTypeDefs = gql`
+const SeeProfileTypeDefs = gql`
     type User {
         id: String!
         firstName: String!
@@ -10,6 +10,9 @@ const UsersTypeDefs = gql`
         createdAt: String!
         updatedAt: String!
     }
-`;
+    type Query {
+        seeProfile(username: String): User
+    }
+`
 
-export default UsersTypeDefs;
+export default SeeProfileTypeDefs;
