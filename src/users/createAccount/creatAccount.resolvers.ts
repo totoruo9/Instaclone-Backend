@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import client from "../../client";
+import { Resolvers } from "../../types";
 
-const CreateAccountResolvers = {
+const CreateAccountResolvers: Resolvers = {
     Mutation: {
         createAccount: async (_, {
             firstName,
@@ -9,7 +9,7 @@ const CreateAccountResolvers = {
             username,
             email,
             password
-        }) => {
+        }, {client}) => {
             try{
                 // check if username or email are alreay on DB.
                 const existingUser = await client.user.findFirst({
