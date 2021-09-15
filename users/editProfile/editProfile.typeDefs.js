@@ -13,7 +13,7 @@ const EditProfileTypeDefs = gql`
             username: String
             email: String
             password: String
-        ): EditProfileResult
+        ): EditProfileResult!
     }
 `;
 
