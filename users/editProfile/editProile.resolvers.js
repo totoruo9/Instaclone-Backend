@@ -4,23 +4,24 @@ import bcrypt from "bcrypt";
 
 const EditProfileResolvers = {
     Mutation: {
-        editProfile: async (_,{
-            firstName,
-            lastName,
-            username,
-            email,
-            password:newPassword,
-            token
-        }) => {
-            const {id} = await jwt.verify(token, process.env.SECREAT_KEY);
-
+        editProfile: async (
+            _,
+            {
+                firstName,
+                lastName,
+                username,
+                email,
+                password:newPassword
+            },
+            {loggedInUser}
+        ) => {
             let uglyPassword = null;
             if(newPassword){
                 uglyPassword = await bcrypt.hash(newPassword, 10);
             };
             const updatedUser = await client.user.update({
                 where:{
-                    id
+                    id: loggedInUser.id,
                 },
                 data:{
                     firstName,
