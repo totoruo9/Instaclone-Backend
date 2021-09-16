@@ -1,6 +1,8 @@
 import { gql } from "apollo-server";
 
 const EditProfileTypeDefs = gql`
+    scalar Upload
+
     type EditProfileResult {
         ok: Boolean!
         error: String
@@ -13,6 +15,8 @@ const EditProfileTypeDefs = gql`
             username: String
             email: String
             password: String
+            bio: String
+            avatar: Upload
         ): EditProfileResult!
     }
 `;

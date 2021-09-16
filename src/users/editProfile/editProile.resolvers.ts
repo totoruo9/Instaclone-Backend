@@ -1,8 +1,10 @@
 import bcrypt from "bcrypt";
 import { Resolvers } from "../../types";
 import { protectedResolver } from "../user.utils";
+import {GraphQLUpload} from "graphql-upload";
 
-const EditProfileResolvers: Resolvers = {
+const EditProfileResolvers = {
+    Upload: GraphQLUpload,
     Mutation: {
         editProfile: protectedResolver(
             async (
@@ -12,10 +14,13 @@ const EditProfileResolvers: Resolvers = {
                     lastName,
                     username,
                     email,
-                    password:newPassword
+                    password:newPassword,
+                    bio,
+                    avatar
                 },
                 {loggedInUser, client}
             ) => {
+                console.log(avatar);
                 let uglyPassword = null;
                 if(newPassword){
                     uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -29,6 +34,7 @@ const EditProfileResolvers: Resolvers = {
                         lastName,
                         email,
                         username,
+                        bio,
                         ...(uglyPassword && {password: uglyPassword}),
                     }
                 });
