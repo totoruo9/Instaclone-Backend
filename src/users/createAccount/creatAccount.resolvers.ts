@@ -26,11 +26,18 @@ const CreateAccountResolvers: Resolvers = {
                 const uglyPassword = await bcrypt.hash(password, 10);
 
                 // save amd return the user
-                return client.user.create({data:{
+                await client.user.create({data:{
                     username, email, firstName, lastName, password: uglyPassword
-                }})
+                }});
+
+                return {
+                    ok: true
+                }
             }catch(error){
-                return error
+                return {
+                    ok: false,
+                    error: "You don't create account."
+                }
             }
         }
     }

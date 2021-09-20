@@ -11,6 +11,8 @@ const UsersTypeDefs = gql`
         updatedAt: String!
         bio: String
         avatar: String
+        following: [User]
+        followers: [User]
     }
 `;
 
