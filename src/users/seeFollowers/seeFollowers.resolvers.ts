@@ -4,7 +4,6 @@ const seeFollowersResolvers:Resolvers = {
     Query: {
         seeFollowers: async(_,{username, page}, {client}) => {
             const ok = await client.user.findUnique({where:{username}, select: {id: true}});
-            console.log(ok);
             if(!ok){
                 return{
                     ok: false,

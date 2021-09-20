@@ -18,7 +18,7 @@ const startServer = async() => {
         context: async({req}) => {
             return {
                 loggedInUser: await getUser(req.headers.token),
-                client
+                client,
             }
         }
     });
