@@ -1,3 +1,4 @@
+import { createWriteStream } from "fs";
 import bcrypt from "bcrypt";
 import { Resolvers } from "../../types";
 import { protectedResolver } from "../user.utils";
@@ -20,7 +21,19 @@ const EditProfileResolvers = {
                 },
                 {loggedInUser, client}
             ) => {
-                console.log(avatar);
+                console.log(avatar, bio)
+                let avatarUrl = null;
+                if(avatar){
+                    const {filename, createReadStream} = await avatar;
+                    const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}}`;
+                    console.log(filename, createReadStream);
+                    const readStream = createReadStream(process.cwd()+"/uploads/"+newFilename);
+                    console.log(readStream);
+                    const writeStream = createWriteStream("uploads");
+                    readStream.pipe(writeStream);
+                    avatarUrl = `http://localhost:4000/static/${newFilename}`;
+                }
+
                 let uglyPassword = null;
                 if(newPassword){
                     uglyPassword = await bcrypt.hash(newPassword, 10);
@@ -36,6 +49,7 @@ const EditProfileResolvers = {
                         username,
                         bio,
                         ...(uglyPassword && {password: uglyPassword}),
+                        ...(avatarUrl && {avatar: avatarUrl})
                     }
                 });
                 if(updatedUser.id){

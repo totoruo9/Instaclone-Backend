@@ -5,9 +5,7 @@ const SeeProfileResolvers:Resolvers = {
     Query: {
         seeProfile: protectedResolver(
             (_, {username}, {client}) => client.user.findUnique({
-                where: {
-                    username
-                }
+                where: {username}
             })
         )
     },
