@@ -8,7 +8,21 @@ const PhotosResolvers:Resolvers = {
         hashtags: ({id},_,{client}) => {
             return client.hashtag.findMany({where:{photos:{some:{id}}}})
         }
+    },
+    Hashtag: {
+        photos: ({id}, {page}, {client}) => {
+            console.log(page)
+            return client.hashtag.findUnique({where:{id}}).photos({
+                take: 5,
+                skip: (1-page)*5
+            })
+        },
+        totalPhotos: ({id}, _, {client}) => client.photo.count({where:{
+            hashtags:{
+                some:{id}
+            }
+        }})
     }
-};
+}; 
 
 export default PhotosResolvers;
