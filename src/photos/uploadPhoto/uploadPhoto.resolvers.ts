@@ -1,6 +1,7 @@
 import client from "../../client";
 import { Resolvers } from "../../types";
 import {protectedResolver} from "../../users/user.utils"
+import { processHashtags } from "../photos.utils";
 
 const UploadPhotoResolvers:Resolvers = {
     Mutation :{
@@ -9,12 +10,7 @@ const UploadPhotoResolvers:Resolvers = {
                 let hashtagObj = [];
                 // parse caption
                 if(caption){
-                    const hashtags = caption.match(/#[\d|A-Z|a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+/g);
-                    hashtagObj = hashtags.map((hashtag) => ({
-                        where: {hashtag},
-                        create: {hashtag}
-                    }));
-                    console.log(hashtagObj);
+                    hashtagObj = processHashtags(caption);
                 }
                 // get or create Hashtags
                 return client.photo.create({
