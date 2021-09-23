@@ -24,9 +24,12 @@ const UserResolvers:Resolvers = {
                     }
                 },
             })
-
             return Boolean(exists);
-        }
+        },
+        photos: ({id}, {page}, {client}) => client.user.findUnique({where:{id}}).photos({
+            take:5,
+            skip:(1-page)*5
+        })
     }
 }
 
