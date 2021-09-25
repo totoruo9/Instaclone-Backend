@@ -4,45 +4,45 @@ Instaclone Backend
 
 ## User:
 
-- [ ] Create Account
-- [ ] See Profile
-- [ ] Login
-- [ ] Edit Profile
-- [ ] Follow User
-- [ ] Unfollow User
-- [ ] Change Avatar (Image Upload)
-- [ ] Follow User
-- [ ] Unfollow User
-- [ ] See Followers and See Following w/ Pagenation
-- [ ] Computed Fields
-- [ ] Search Users
+- [x] Create Account
+- [x] See Profile
+- [x] Login
+- [x] Edit Profile
+- [x] Follow User
+- [x] Unfollow User
+- [x] Change Avatar (Image Upload)
+- [x] Follow User
+- [x] Unfollow User
+- [x] See Followers and See Following w/ Pagenation
+- [x] Computed Fields
+- [x] Search Users
 
 ## Photos
 
-- [ ] Upload Photo (Parse #)
-- [ ] See Photo
-- [ ] See Hashtags
-- [ ] Search Photos
-- [ ] Edit Photo
-- [ ] Like / Unlike Photo
-- [ ] See Photo Likes
-- [ ] See Photo Comments
-- [ ] See Feed
-- [ ] Is Mine (Delete Photo)
+- [x] Upload Photo (Parse #)
+- [x] See Photo
+- [x] See Hashtags
+- [x] Search Photos
+- [x] Edit Photo
+- [x] Like / Unlike Photo
+- [x] See Photo Likes
+- [x] See Photo Comments
+- [x] See Feed
+- [x] Is Mine (Delete Photo)
 
 ## Comments
 
-- [ ] Comment on Photo
-- [ ] Edit Comment
-- [ ] Delete Comment (Is Mine)
+- [x] Comment on Photo
+- [x] Edit Comment
+- [x] Delete Comment (Is Mine)
 
 ## Extras
 
-- [ ] S3 Image Upload
+- [x] S3 Image Upload
 
 ## DMs
 
-- [ ] Create Room
-- [ ] Get Room
-- [ ] Send Message
+- [x] See Room
+- [ ] See Rooms
+- [ ] Send Message (Create Room)
 - [ ] Realtime Messages
