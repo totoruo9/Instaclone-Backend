@@ -14,8 +14,6 @@ import client from "./client";
 import { getUser } from "./users/user.utils";
 import pubsub from "./pubsub";
 
-console.log(pubsub);
-
 const PORT = process.env.PORT;
 const schema = makeExecutableSchema({typeDefs, resolvers});
 
@@ -23,10 +21,13 @@ const startServer = async() => {
     const apollo = new ApolloServer({
         schema,
         context: async({req}) => {
-            return {
-                ...(req && {loggedInUser: await getUser(req.headers.token)}),
-                client,
+            if(req){
+                return {
+                    ...(req && {loggedInUser: await getUser(req.headers.token)}),
+                    client,
+                }
             }
+            
         },
         plugins: [{
             async serverWillStart(){
@@ -52,7 +53,19 @@ const startServer = async() => {
     const subscriptionServer = SubscriptionServer.create({
         schema,
         execute,
-        subscribe
+        subscribe,
+        onConnect: async ({token}, webSocket, context) => {
+            if(!token){
+                throw new Error("You can't listen.");
+            }
+            const loggedInUser = await getUser(token);
+            // console.log(token);
+            // console.log("User: ",loggedInUser);
+            return loggedInUser;
+        },
+        onDisconnect(webSocket, context) {
+            console.log("Disconnected!")
+        }
     },{
         server: httpServer,
         path: apollo.graphqlPath
