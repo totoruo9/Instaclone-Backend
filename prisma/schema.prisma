@@ -79,7 +79,7 @@ model Room {
   users    User[]
   createAt DateTime  @default(now())
   updateAt DateTime  @updatedAt
-  Mmssages Message[]
+  messages Message[]
 }
 
 model Message {

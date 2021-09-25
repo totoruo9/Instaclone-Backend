@@ -25,6 +25,9 @@ const MessagesResolvers:Resolvers = {
                 }
             })
         }
+    },
+    Message: {
+        user: ({id}, _, {client}) => client.message.findUnique({where: {id}}).user(),
     }
 };
 

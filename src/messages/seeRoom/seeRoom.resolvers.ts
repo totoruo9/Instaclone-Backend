@@ -5,7 +5,7 @@ const SeeRoomResolvers:Resolvers = {
     Query: {
         seeRoom: protectedResolver(
             async(_, {id}, {client, loggedInUser}) =>{
-                client.room.findFirst({
+                return client.room.findFirst({
                     where: {
                         id,
                         users: {
