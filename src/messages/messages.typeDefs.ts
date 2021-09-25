@@ -1,18 +1,20 @@
 import { gql } from "apollo-server";
 
 const MessagesTypeDefs = gql`
-    type Messages {
+    type Message {
         id: Int!
         payload: String!
         user: User!
         room: Room!
+        read: Boolean!
         createAt: String!
         updataAt: String!
     }
     type Room {
         id: Int!
-        user: [User]
-        messages: [Messages]
+        unreadTotal: Int!
+        users: [User]
+        messages(cursor: Int): [Message]
         createAt: String!
         updataAt: String!
     }

@@ -58,11 +58,11 @@ const SendMessageResolvers:Resolvers = {
                             connect: {
                                 id: room.id
                             }
-                        }
-                    },
-                    user: {
-                        connect: {
-                            id: loggedInUser.id
+                        },
+                        user: {
+                            connect: {
+                                id: loggedInUser.id
+                            }
                         }
                     }
                 })
