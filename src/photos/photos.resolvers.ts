@@ -9,7 +9,13 @@ const PhotosResolvers:Resolvers = {
             return client.hashtag.findMany({where:{photos:{some:{id}}}})
         },
         likes: ({id}, _, {client}) => client.like.count({where:{photoId:id}}),
-        comments: ({id}, _, {client}) => client.comment.count({where:{photoId:id}})
+        comments: ({id}, _, {client}) => client.comment.count({where:{photoId:id}}),
+        isMine: ({userId}, _, {loggedInUser}) => {
+            if(!loggedInUser){
+                return false
+            }
+            return loggedInUser.id === userId;
+        }
     },
     Hashtag: {
         photos: ({id}, {page}, {client}) => {

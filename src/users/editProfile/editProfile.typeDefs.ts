@@ -3,11 +3,6 @@ import { gql } from "apollo-server";
 const EditProfileTypeDefs = gql`
     scalar Upload
 
-    type EditProfileResult {
-        ok: Boolean!
-        error: String
-    }
-
     type Mutation {
         editProfile(
             firstName: String
@@ -17,7 +12,7 @@ const EditProfileTypeDefs = gql`
             password: String
             bio: String
             avatar: Upload
-        ): EditProfileResult!
+        ): MutationResponse!
     }
 `;
 
