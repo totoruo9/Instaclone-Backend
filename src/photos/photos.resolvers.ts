@@ -8,7 +8,8 @@ const PhotosResolvers:Resolvers = {
         hashtags: ({id},_,{client}) => {
             return client.hashtag.findMany({where:{photos:{some:{id}}}})
         },
-        likes: ({id}, _, {client}) => client.like.count({where:{photoId:id}})
+        likes: ({id}, _, {client}) => client.like.count({where:{photoId:id}}),
+        comments: ({id}, _, {client}) => client.comment.count({where:{photoId:id}})
     },
     Hashtag: {
         photos: ({id}, {page}, {client}) => {
@@ -23,7 +24,7 @@ const PhotosResolvers:Resolvers = {
                 some:{id}
             }
         }})
-    }
+    },
 }; 
 
 export default PhotosResolvers;
