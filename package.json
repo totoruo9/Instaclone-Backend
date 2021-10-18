@@ -41,7 +41,8 @@
     "graphql-upload": "^12.0.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "subscriptions-transport-ws": "^0.9.19"
+    "subscriptions-transport-ws": "^0.9.19",
+    "fs-capacitor": "^6.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
