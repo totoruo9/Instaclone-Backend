@@ -20,6 +20,7 @@ const schema = makeExecutableSchema({typeDefs, resolvers});
 const startServer = async() => {
     const apollo = new ApolloServer({
         schema,
+        introspection: true,
         context: async({req}) => {
             if(req){
                 return {
@@ -59,8 +60,7 @@ const startServer = async() => {
                 throw new Error("You can't listen.");
             }
             const loggedInUser = await getUser(token);
-            // console.log(token);
-            // console.log("User: ",loggedInUser);
+            
             return loggedInUser;
         },
         onDisconnect(webSocket, context) {
