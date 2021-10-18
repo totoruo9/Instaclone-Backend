@@ -13,6 +13,7 @@ import { graphqlUploadExpress } from "graphql-upload";
 import client from "./client";
 import { getUser } from "./users/user.utils";
 import pubsub from "./pubsub";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core/dist/plugin/landingPage/graphqlPlayground';
 
 const PORT = process.env.PORT;
 const schema = makeExecutableSchema({typeDefs, resolvers});
@@ -30,15 +31,18 @@ const startServer = async() => {
             }
             
         },
-        plugins: [{
-            async serverWillStart(){
-                return {
-                    async drainServer() {
-                        subscriptionServer.close();
+        plugins: [
+            {
+                async serverWillStart(){
+                    return {
+                        async drainServer() {
+                            subscriptionServer.close();
+                        }
                     }
                 }
-            }
-        }]
+            },
+            ApolloServerPluginLandingPageGraphQLPlayground()
+        ]
     });
 
     await apollo.start();
