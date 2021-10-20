@@ -10,7 +10,13 @@ const PhotosResolvers:Resolvers = {
         },
         likes: ({id}, _, {client}) => client.like.count({where:{photoId:id}}),
         commentNumber: ({id}, _, {client}) => client.comment.count({where:{photoId:id}}),
-        comments:({id}, _, {client}) => client.photo.findUnique({where:{id}}).comments(),
+        comments:({id}, _, {client}) =>
+            client.comment.findMany({
+                where:{photoId:id},
+                include:{
+                    user: true
+                }
+            }),
         isMine: ({userId}, _, {loggedInUser}) => {
             if(!loggedInUser){
                 return false
