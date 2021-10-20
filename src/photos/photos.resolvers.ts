@@ -1,4 +1,3 @@
-import client from "../client";
 import { Resolvers } from "../types";
 
 const PhotosResolvers:Resolvers = {
@@ -10,7 +9,8 @@ const PhotosResolvers:Resolvers = {
             return client.hashtag.findMany({where:{photos:{some:{id}}}})
         },
         likes: ({id}, _, {client}) => client.like.count({where:{photoId:id}}),
-        comments: ({id}, _, {client}) => client.comment.count({where:{photoId:id}}),
+        commentNumber: ({id}, _, {client}) => client.comment.count({where:{photoId:id}}),
+        comments:({id}, _, {client}) => client.photo.findUnique({where:{id}}).comments(),
         isMine: ({userId}, _, {loggedInUser}) => {
             if(!loggedInUser){
                 return false
