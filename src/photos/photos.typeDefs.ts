@@ -13,6 +13,7 @@ const PhotoTypeDefs = gql`
         likes: Int!
         isMine: Boolean!
         comments: Int!
+        isLiked: Boolean!
     }
     type Hashtag {
         id: Int!
