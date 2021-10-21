@@ -11,7 +11,7 @@ const UsersTypeDefs = gql`
         updatedAt: String!
         bio: String
         avatar: String
-        photos(page:Int!): [Photo]
+        photos(page:Int): [Photo]
         following: [User]
         followers: [User]
         totalFollowing: Int!

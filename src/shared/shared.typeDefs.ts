@@ -4,6 +4,7 @@ const SharedTypeDefs = gql`
     type MutationResponse {
         ok: Boolean!
         error: String
+        id: Int
     }
 `;
 

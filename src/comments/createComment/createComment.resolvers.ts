@@ -21,7 +21,7 @@ const CreateCommentResolvers:Resolvers = {
                     }
                 };
 
-                await client.comment.create({
+                const newComment = await client.comment.create({
                     data: {
                         payload,
                         photo:{
@@ -38,7 +38,8 @@ const CreateCommentResolvers:Resolvers = {
                 });
 
                 return {
-                    ok: true
+                    ok: true,
+                    id: newComment.id
                 }
             }
         )
